@@ -1,16 +1,19 @@
+import "./EndScreen.css";
+
 const EndScreen = () => {
   const won = true;
 
   return (
-    <div id="endScreenContainer">
-      <div id="endScreenMessage">
+    <div className="endScreenContainer">
+      <div className="endScreenMessage">
         <h2>End of the game!</h2>
         <p>Submitted wrong answer or timed out.</p>
         {won && <p>CONGRATULATIONS YOU WON 100,000lv.</p>}
         <p>Answered questions: 12</p>
       </div>
 
-      <div id="questionAndPrizesTable">
+      <div className="questionAndPrizesTable">
+        <p className="prizeText">Prize won:</p>
         <p>15: 100 000</p>
         <p>14: 50 000</p>
         <p>13: 30 000</p>
@@ -28,7 +31,7 @@ const EndScreen = () => {
         <p>1: 100</p>
       </div>
 
-      <div id="buttonContainer">
+      <div className="playAgainButtonContainer">
         <button>Play Again</button>
       </div>
     </div>

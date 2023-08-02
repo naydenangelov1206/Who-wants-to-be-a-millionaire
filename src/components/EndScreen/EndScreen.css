@@ -1,0 +1,66 @@
+.endScreenContainer {
+  height: 100vh;
+  background-image: url("../../../public/backgroundStudio/whoWantsToBeAMillionaireStudioBackground.jpg");
+  background-position: center;
+}
+
+.endScreenMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.endScreenMessage p {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.endScreenMessage h2 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: white;
+  font-size: 36px;
+}
+
+.questionAndPrizesTable {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(66, 179, 177, 0.7);
+  width: 300px;
+  height: 500px;
+  border-radius: 50px;
+  margin: 0 auto;
+  border: 2px solid white;
+}
+
+.questionAndPrizesTable p {
+  font-size: 20px;
+  color: yellow;
+}
+
+.prizeText {
+  margin-bottom: 30px;
+}
+
+.playAgainButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.playAgainButtonContainer button {
+  background-color: rgb(66, 179, 177);
+  width: 300px;
+  padding: 20px;
+  border-radius: 50px;
+  color: white;
+  font-size: 20px;
+  border: none;
+}

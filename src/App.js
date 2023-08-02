@@ -11,9 +11,9 @@ function App() {
 
   return (
     <div>
-      {/* <StartScreen></StartScreen> */}
+      <StartScreen></StartScreen>
       {/* {optionScreen && <SettingsScreen />} */}
-      {startGame && <QuestionScreen />}
+      {/* {startGame && <QuestionScreen />} */}
       {/* {endGame && <EndScreen />} */}
     </div>
   );

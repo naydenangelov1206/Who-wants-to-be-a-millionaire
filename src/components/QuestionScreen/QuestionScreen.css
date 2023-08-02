@@ -1,6 +1,7 @@
 .gameContainer {
   height: 100vh;
-  background-image: url("./backgroundImage/whoWantsToBeAMillionaireStudiobackgorund.jpg");
+  background-image: url("../../../public/backgroundStudio/whoWantsToBeAMillionaireStudioBackground.jpg");
+  background-position: center;
 }
 
 .lifelines img {
