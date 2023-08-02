@@ -1,0 +1,44 @@
+.settingsContainer {
+  height: 100vh;
+  background-image: url("../../../public/backgroundStudio/whoWantsToBeAMillionaireStudioBackground.jpg");
+  background-position: center;
+}
+
+.cancelButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancelButtonContainer button {
+  margin-top: 30px;
+  margin-right: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background-color: rgb(66, 179, 177);
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+}
+
+.optionsContainer label {
+  color: white;
+  font-size: 36px;
+}
+
+.optionsContainer label select {
+  background-color: rgb(66, 179, 177);
+  border-radius: 50px;
+  width: 300px;
+  height: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
