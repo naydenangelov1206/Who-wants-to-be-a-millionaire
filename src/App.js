@@ -11,10 +11,10 @@ function App() {
 
   return (
     <div>
-      {/* <StartScreen></StartScreen>
-      {optionScreen && <SettingsScreen />}
-      {startGame && <QuestionScreen />} */}
-      {endGame && <EndScreen />}
+      {/* <StartScreen></StartScreen> */}
+      {/* {optionScreen && <SettingsScreen />} */}
+      {startGame && <QuestionScreen />}
+      {/* {endGame && <EndScreen />} */}
     </div>
   );
 }
