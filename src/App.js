@@ -1,13 +1,14 @@
 import StartScreen from "./components/StartScreen/StartScreen";
 import "./App.css";
+import SettingsScreen from "./components/SettingsScreen/SettingsScreen";
+
 function App() {
-  fetch("https://opentdb.com/api.php?amount=15&category=22&difficulty=easy")
-    .then(data => data.json())
-    .then(questions => console.log(questions.results));
+  const startGame = true;
 
   return (
     <div>
-      <StartScreen></StartScreen>
+      {/* <StartScreen></StartScreen> */}
+      {startGame && <SettingsScreen></SettingsScreen>}
     </div>
   );
 }
