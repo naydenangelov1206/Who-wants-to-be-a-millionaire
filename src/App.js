@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-
+import StartScreen from "./components/StartScreen/StartScreen";
+import "./App.css";
 function App() {
+  fetch("https://opentdb.com/api.php?amount=15&category=22&difficulty=easy")
+    .then(data => data.json())
+    .then(questions => console.log(questions.results));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <StartScreen></StartScreen>
     </div>
   );
 }
