@@ -19,6 +19,19 @@
   border: none;
   font-size: 20px;
 }
+.settingsTextContainer {
+  margin-bottom: 50px;
+}
+
+.settingsTextContainer p {
+  width: 400px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgb(66, 179, 177);
+  color: white;
+  font-size: 36px;
+}
 
 .optionsContainer {
   display: flex;
@@ -30,7 +43,12 @@
 
 .optionsContainer label {
   color: white;
-  font-size: 36px;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .optionsContainer label select {
@@ -38,7 +56,21 @@
   border-radius: 50px;
   width: 300px;
   height: 50px;
-  margin-top: 50px;
   margin-bottom: 50px;
   font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+.settingsPlayButton {
+  width: 400px;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 50px;
+  background-color: rgb(66, 179, 177);
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  color: white;
+  margin-top: 50px;
 }
