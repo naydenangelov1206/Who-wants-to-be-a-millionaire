@@ -1,0 +1,25 @@
+.startScreenContainer {
+  height: 100vh;
+  background-image: url("../../../public/backgroundLogo/whoWantsToBeAMillionaireLogoBackground.jpg");
+  background-position: center;
+  background-size: 1720px;
+}
+
+.startButtonContainer {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: end;
+}
+
+.startButton {
+  padding: 15px;
+  background-color: rgb(66, 179, 177);
+  border-radius: 50px;
+  color: white;
+  border: none;
+  width: 500px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

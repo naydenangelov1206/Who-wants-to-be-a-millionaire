@@ -1,12 +1,11 @@
-import styles from "./StartScreen.module.css";
+import "./StartScreen.css";
 
 const StartScreen = () => {
   return (
-    <div className={styles.startScreenContainer}>
-      <div className={styles.backgroundContainer}>
-        <div className={styles.backgroundImage}></div>
+    <div className="startScreenContainer">
+      <div className="startButtonContainer">
+        <button className="startButton">Start Game</button>
       </div>
-      <button className={styles.startButton}>Start Game</button>
     </div>
   );
 };
