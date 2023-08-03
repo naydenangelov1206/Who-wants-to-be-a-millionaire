@@ -1,27 +1,39 @@
+import classNames from "classnames";
+import he from "he";
+
 const Answer = ({
   answer,
   index,
   userAnswer,
   correctAnswer,
   showCorrectAnswer,
+  showIncorrectAnswerMessage,
   handleAnswer,
 }) => {
   const answerKeys = ["A", "B", "C", "D"];
 
-  const isUserAnswerCorrect = userAnswer === correctAnswer;
-  const isThisAnswerCorrect = answer === correctAnswer;
-  const isUserAnswerWrong = userAnswer && !isUserAnswerCorrect;
+  const isCorrectAnswer = answer === correctAnswer;
+  const isSelectedAnswer = answer === userAnswer;
+  const shouldShowCorrectAnswer = showCorrectAnswer && isCorrectAnswer;
+  const shouldShowIncorrectAnswer =
+    showIncorrectAnswerMessage && isSelectedAnswer;
 
-  const answerClickHandler = () => {
-    if (!showCorrectAnswer) {
+  const handleClick = () => {
+    if (!showCorrectAnswer && !showIncorrectAnswerMessage) {
       handleAnswer(answer);
     }
   };
 
+  const answerClassNames = classNames("answer", {
+    "selected": isSelectedAnswer,
+    "correct": shouldShowCorrectAnswer,
+    "incorrect": shouldShowIncorrectAnswer,
+  });
+
   return (
-    <p>
-      {answerKeys[index]}: {answer}
-    </p>
+    <div className={answerClassNames} onClick={handleClick}>
+      {answerKeys[index]}: {he.decode(answer)}
+    </div>
   );
 };
 

@@ -32,6 +32,7 @@ function App() {
           selectedDifficulty={selectedDifficulty}
           setSelectedCategory={selectedCategory}
           setSelectedDifficulty={selectedDifficulty}
+          setStartGame={setStartGame}
         />
       )}
     </div>

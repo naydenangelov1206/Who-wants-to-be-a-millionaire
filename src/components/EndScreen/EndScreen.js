@@ -1,7 +1,7 @@
 import "./EndScreen.css";
 import BackgroundMusic from "../BackgroundMusic/BackgroundMusic";
 
-const EndScreen = () => {
+const EndScreen = ({ score, resetGame }) => {
   const won = true;
 
   return (
@@ -15,7 +15,7 @@ const EndScreen = () => {
         <h2>End of the game!</h2>
         <p>Submitted wrong answer or timed out.</p>
         {won && <p>CONGRATULATIONS YOU WON 100,000lv.</p>}
-        <p>Answered questions: 12</p>
+        <p>Answered questions: {score}</p>
       </div>
 
       <div className="questionAndPrizesTable">
@@ -38,7 +38,7 @@ const EndScreen = () => {
       </div>
 
       <div className="playAgainButtonContainer">
-        <button>Play Again</button>
+        <button onClick={resetGame}>Play Again</button>
       </div>
     </div>
   );

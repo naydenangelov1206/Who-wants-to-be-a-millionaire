@@ -15,6 +15,7 @@ const GameScreen = ({
   selectedDifficulty,
   setSelectedCategory,
   setSelectedDifficulty,
+  setStartGame,
 }) => {
   const [questions, setQuestions] = useState([]);
 
@@ -24,7 +25,7 @@ const GameScreen = ({
 
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
-  const [showNextButton, setShowNextButton] = useState(true);
+  const [showNextButton, setShowNextButton] = useState(false);
 
   const [gameOver, setGameOver] = useState(false);
 
@@ -39,6 +40,32 @@ const GameScreen = ({
   const [showOverlay, setShowOverlay] = useState(false);
 
   const [overlayMessage, setOverlayMessage] = useState("");
+
+  const [showCorrectAnswerMessage, setShowCorrectAnswerMessage] =
+    useState(false);
+
+  const [showIncorrectAnswerMessage, setShowIncorrectAnswerMessage] =
+    useState(false);
+
+  const [timer, setTimer] = useState(60);
+
+  const resetGame = () => {
+    setQuestions([]);
+    setCurrentQuestionIndex(0);
+    setUserAnswer(null);
+    setShowOverlay(false);
+    setUsedJokers({
+      isFiftyFiftyUsed: false,
+      isCallAFriendUsed: false,
+      isHelpFromAudienceUsed: false,
+    });
+    setOverlayMessage("");
+    setShowCorrectAnswer(false);
+    setShowNextButton(false);
+    setScore(0);
+    setStartGame(true);
+    setGameOver(false);
+  };
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -59,21 +86,41 @@ const GameScreen = ({
     fetchQuestions();
   }, [selectedCategory, selectedDifficulty]);
 
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setUserAnswer(null);
+      setShowCorrectAnswer(false);
+      setShowCorrectAnswerMessage(false);
+      setShowIncorrectAnswerMessage(false);
+      setShowNextButton(false);
+      setTimer(60);
+    } else {
+      setGameOver(true);
+    }
+  };
+
   const handleAnswer = answer => {
+    if (showCorrectAnswerMessage || showIncorrectAnswerMessage) {
+      return;
+    }
+
     setUserAnswer(answer);
     setShowCorrectAnswer(true);
 
     if (answer === questions[currentQuestionIndex].correct_answer) {
       setScore(prevScore => prevScore + 1);
-    } else {
       setShowNextButton(true);
-    }
-  };
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     } else {
+      setShowIncorrectAnswerMessage(true);
+      setShowCorrectAnswerMessage(true);
+
+      setTimeout(() => {
+        setGameOver(true);
+      }, 3000);
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
       setGameOver(true);
     }
   };
@@ -165,7 +212,7 @@ const GameScreen = ({
   };
 
   if (gameOver) {
-    return <EndScreen />;
+    return <EndScreen score={score} resetGame={resetGame} />;
   }
 
   if (!questions.length) {
@@ -230,7 +277,7 @@ const GameScreen = ({
 
       <div className="scoreContainer">
         <p className="timer">
-          <Timer onTimeUp={handleTimeUp} />
+          <Timer onTimeUp={handleTimeUp} timer={timer} setTimer={setTimer} />
         </p>
         <p>Score: {score}</p>
       </div>
@@ -242,6 +289,14 @@ const GameScreen = ({
 
         <div className="answerContainer">
           {answers.map((answer, index) => {
+            const isCorrectAnswer =
+              answer === questions[currentQuestionIndex].correct_answer;
+            const isSelectedAnswer = answer === userAnswer;
+            const shouldShowCorrectAnswer =
+              showCorrectAnswer && isCorrectAnswer;
+            const shouldShowIncorrectAnswer =
+              showIncorrectAnswerMessage && isSelectedAnswer;
+
             return (
               <Answer
                 key={index}
@@ -250,6 +305,8 @@ const GameScreen = ({
                 userAnswer={userAnswer}
                 correctAnswer={currentQuestion.correct_answer}
                 showCorrectAnswer={showCorrectAnswer}
+                showCorrectAnswerMessage={shouldShowCorrectAnswer}
+                showIncorrectAnswerMessage={shouldShowIncorrectAnswer}
                 handleAnswer={handleAnswer}
               />
             );
