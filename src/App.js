@@ -14,7 +14,7 @@ function App() {
     <div>
       {!startGame && <StartScreen setStartGame={setStartGame} />}
       {startGame && <SettingsScreen setStartGame={setStartGame} />}
-      {/* {optionScreen && <QuestionScreen />} */}
+      {optionScreen && <QuestionScreen />}
       {/* {endGame && <EndScreen />} */}
     </div>
   );

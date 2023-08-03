@@ -1,7 +1,8 @@
 import "./SettingsScreen.css";
 
-import SelectOption from "../SelectOption/SelectOption";
 import { categoryOptions, difficultyOptions } from "../../utils/options";
+import SelectDifficultyOption from "../SelectOption/SelectDifficultyOption";
+import SelectCategoryOption from "../SelectOption/SelectCategoryOption";
 
 const SettingsScreen = ({ setStartGame }) => {
   return (
@@ -10,28 +11,37 @@ const SettingsScreen = ({ setStartGame }) => {
         <button onClick={() => setStartGame(false)}>❌</button>
       </div>
 
-      <div className="optionsContainer">
+      <form className="optionsContainer">
         <div className="settingsTextContainer">
           <p>Settings</p>
         </div>
         <label htmlFor="category">
           Category:
           <select name="category" id="category">
-            {categoryOptions.map(c => {
-              return <SelectOption option={c} />;
+            {categoryOptions.map((category, index) => {
+              return (
+                <SelectCategoryOption
+                  key={index}
+                  option={category}
+                  index={index}
+                />
+              );
             })}
           </select>
         </label>
         <label htmlFor="difficulty">
           Difficulty:
           <select name="difficulty" id="difficulty">
-            {difficultyOptions.map(d => {
-              return <SelectOption option={d} />;
+            {difficultyOptions.map((diff, index) => {
+              return <SelectDifficultyOption key={index} option={diff} />;
             })}
           </select>
         </label>
-        <button className="settingsPlayButton">Play</button>
-      </div>
+
+        <button type="submit" className="settingsPlayButton">
+          Play
+        </button>
+      </form>
     </div>
   );
 };
