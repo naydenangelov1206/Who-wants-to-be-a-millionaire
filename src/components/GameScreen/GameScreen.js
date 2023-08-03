@@ -30,6 +30,16 @@ const GameScreen = ({
 
   const [score, setScore] = useState(0);
 
+  const [usedJokers, setUsedJokers] = useState({
+    isFiftyFiftyUsed: false,
+    isCallAFriendUsed: false,
+    isHelpFromAudienceUsed: false,
+  });
+
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const [overlayMessage, setOverlayMessage] = useState("");
+
   useEffect(() => {
     async function fetchQuestions() {
       try {
@@ -72,6 +82,88 @@ const GameScreen = ({
     setGameOver(true);
   };
 
+  const handleFiftyFifty = () => {
+    if (usedJokers.isFiftyFiftyUsed) {
+      return;
+    }
+
+    setUsedJokers(prev => ({
+      ...prev,
+      isFiftyFiftyUsed: true,
+    }));
+
+    const currentAnswers = [
+      ...questions[currentQuestionIndex].incorrect_answers,
+    ];
+    const correctAnswer = questions[currentQuestionIndex].correct_answer;
+
+    let randomIndex1, randomIndex2;
+    do {
+      randomIndex1 = Math.floor(Math.random() * currentAnswers.length);
+    } while (currentAnswers[randomIndex1] === correctAnswer);
+
+    do {
+      randomIndex2 = Math.floor(Math.random() * currentAnswers.length);
+    } while (
+      randomIndex1 === randomIndex2 ||
+      currentAnswers[randomIndex2] === correctAnswer
+    );
+
+    currentAnswers.splice(randomIndex1, 1);
+    currentAnswers.splice(randomIndex2, 1);
+
+    const updatedQuestion = {
+      ...questions[currentQuestionIndex],
+      incorrect_answers: currentAnswers,
+    };
+
+    const updatedQuestions = [
+      ...questions.slice(0, currentQuestionIndex),
+      updatedQuestion,
+      ...questions.slice(currentQuestionIndex + 1),
+    ];
+
+    setQuestions(updatedQuestions);
+  };
+
+  const handleCallAFriend = () => {
+    if (usedJokers.isCallAFriendUsed) return;
+
+    setUsedJokers(prev => ({
+      ...prev,
+      isCallAFriendUsed: true,
+    }));
+
+    handleShowOverlay(
+      "I think the correct answer is" +
+        " " +
+        questions[currentQuestionIndex].correct_answer
+    );
+  };
+
+  const handleHelpFromAudience = () => {
+    if (usedJokers.isHelpFromAudienceUsed) return;
+
+    setUsedJokers(prev => ({
+      ...prev,
+      isHelpFromAudienceUsed: true,
+    }));
+
+    handleShowOverlay(
+      "The public thinks the correct Answer is" +
+        " " +
+        questions[currentQuestionIndex].correct_answer
+    );
+  };
+
+  const handleShowOverlay = message => {
+    setShowOverlay(true);
+    setOverlayMessage(message);
+    setTimeout(() => {
+      setShowOverlay(false);
+    }, 3000);
+  };
+
   if (gameOver) {
     return <EndScreen />;
   }
@@ -95,16 +187,39 @@ const GameScreen = ({
         <BackgroundMusic />
       </div>
 
+      {showOverlay && (
+        <div className="overlay">
+          <p>{overlayMessage}</p>
+        </div>
+      )}
+
       <div className="lifelines">
-        <img src={fiftyFifty} alt="fifty-lifeline/joker" width={70} />
+        {!usedJokers.isFiftyFiftyUsed && (
+          <img
+            src={fiftyFifty}
+            alt="fifty-lifeline/joker"
+            width={70}
+            onClick={handleFiftyFifty}
+          />
+        )}
 
-        <img src={callAFriend} alt="call-a-friend-lifeline/joker" width={70} />
+        {!usedJokers.isCallAFriendUsed && (
+          <img
+            src={callAFriend}
+            alt="call-a-friend-lifeline/joker"
+            width={70}
+            onClick={handleCallAFriend}
+          />
+        )}
 
-        <img
-          src={helpFromTheAudience}
-          alt="help-from-the-audience-lifeline/joker"
-          width={70}
-        />
+        {!usedJokers.isHelpFromAudienceUsed && (
+          <img
+            src={helpFromTheAudience}
+            alt="help-from-the-audience-lifeline/joker"
+            width={70}
+            onClick={handleHelpFromAudience}
+          />
+        )}
 
         <div className="nextQuestionButtonContainer">
           {showNextButton && (
