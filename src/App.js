@@ -13,12 +13,18 @@ function App() {
 
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
+  const [startNewGame, setStartNewGame] = useState(true);
+
+  const handleChangeScreen = () => {
+    setStartNewGame(false);
+    setSettingsScreen(true);
+  };
+
   return (
     <div>
-      {!settingsScreen && <StartScreen setSettingsScreen={setSettingsScreen} />}
+      {startNewGame && <StartScreen handleChangeScreen={handleChangeScreen} />}
       {settingsScreen && !startGame ? (
         <SettingsScreen
-          setSettingsScreen={setSettingsScreen}
           setStartGame={setStartGame}
           setSelectedCategory={setSelectedCategory}
           setSelectedDifficulty={setSelectedDifficulty}
@@ -33,6 +39,8 @@ function App() {
           setSelectedCategory={selectedCategory}
           setSelectedDifficulty={selectedDifficulty}
           setStartGame={setStartGame}
+          setSettingsScreen={setSettingsScreen}
+          setStartNewGame={setStartNewGame}
         />
       )}
     </div>

@@ -5,7 +5,6 @@ import SelectDifficultyOption from "../SelectOption/SelectDifficultyOption";
 import SelectCategoryOption from "../SelectOption/SelectCategoryOption";
 
 const SettingsScreen = ({
-  setSettingsScreen,
   setStartGame,
   setSelectedCategory,
   setSelectedDifficulty,
@@ -32,10 +31,6 @@ const SettingsScreen = ({
 
   return (
     <div className="settingsContainer">
-      <div className="cancelButtonContainer">
-        <button onClick={() => setSettingsScreen(false)}>❌</button>
-      </div>
-
       <form className="optionsContainer" onSubmit={handleSubmit}>
         <div className="settingsTextContainer">
           <p>Settings</p>

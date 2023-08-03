@@ -16,6 +16,8 @@ const GameScreen = ({
   setSelectedCategory,
   setSelectedDifficulty,
   setStartGame,
+  setSettingsScreen,
+  setStartNewGame,
 }) => {
   const [questions, setQuestions] = useState([]);
 
@@ -63,8 +65,10 @@ const GameScreen = ({
     setShowCorrectAnswer(false);
     setShowNextButton(false);
     setScore(0);
-    setStartGame(true);
     setGameOver(false);
+    setStartGame(false);
+    setSettingsScreen(true);
+    setStartNewGame(false);
   };
 
   useEffect(() => {
@@ -276,9 +280,8 @@ const GameScreen = ({
       </div>
 
       <div className="scoreContainer">
-        <p className="timer">
-          <Timer onTimeUp={handleTimeUp} timer={timer} setTimer={setTimer} />
-        </p>
+        <Timer onTimeUp={handleTimeUp} timer={timer} setTimer={setTimer} />
+
         <p>Score: {score}</p>
       </div>
 
