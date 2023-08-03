@@ -9,6 +9,10 @@ function App() {
 
   const [startGame, setStartGame] = useState(false);
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+
   return (
     <div>
       {!settingsScreen && <StartScreen setSettingsScreen={setSettingsScreen} />}
@@ -16,9 +20,20 @@ function App() {
         <SettingsScreen
           setSettingsScreen={setSettingsScreen}
           setStartGame={setStartGame}
+          setSelectedCategory={setSelectedCategory}
+          setSelectedDifficulty={setSelectedDifficulty}
+          selectedCategory={selectedCategory}
+          selectedDifficulty={selectedDifficulty}
         />
       ) : null}
-      {startGame && <GameScreen />}
+      {startGame && (
+        <GameScreen
+          selectedCategory={selectedCategory}
+          selectedDifficulty={selectedDifficulty}
+          setSelectedCategory={selectedCategory}
+          setSelectedDifficulty={selectedDifficulty}
+        />
+      )}
     </div>
   );
 }

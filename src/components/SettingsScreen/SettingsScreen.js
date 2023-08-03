@@ -3,13 +3,15 @@ import "./SettingsScreen.css";
 import { categoryOptions, difficultyOptions } from "../../utils/options";
 import SelectDifficultyOption from "../SelectOption/SelectDifficultyOption";
 import SelectCategoryOption from "../SelectOption/SelectCategoryOption";
-import { useState } from "react";
 
-const SettingsScreen = ({ setSettingsScreen, setStartGame }) => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
-
+const SettingsScreen = ({
+  setSettingsScreen,
+  setStartGame,
+  setSelectedCategory,
+  setSelectedDifficulty,
+  selectedCategory,
+  selectedDifficulty,
+}) => {
   const handleCategoryChange = e => {
     setSelectedCategory(e.target.value);
   };
@@ -24,9 +26,6 @@ const SettingsScreen = ({ setSettingsScreen, setStartGame }) => {
     if (selectedCategory === "" || selectedDifficulty === "") {
       return alert("You need too choose category and difficulty");
     }
-
-    setSelectedCategory("");
-    setSelectedDifficulty("");
 
     setStartGame(true);
   };

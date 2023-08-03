@@ -6,8 +6,14 @@ import fiftyFifty from "./lifelineJokersImages/fifty-fifty.png";
 import callAFriend from "./lifelineJokersImages/call-a-friend.png";
 import helpFromTheAudience from "./lifelineJokersImages/help-from-the-audience.png";
 import EndScreen from "../EndScreen/EndScreen";
+import he from "he";
 
-const GameScreen = () => {
+const GameScreen = ({
+  selectedCategory,
+  selectedDifficulty,
+  setSelectedCategory,
+  setSelectedDifficulty,
+}) => {
   const [questions, setQuestions] = useState([]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -18,11 +24,14 @@ const GameScreen = () => {
     async function fetchQuestions() {
       try {
         const response = await fetch(
-          " https://opentdb.com/api.php?amount=15&category=17&difficulty=medium&type=multiple"
+          `https://opentdb.com/api.php?amount=15&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=multiple`
         );
 
         const data = await response.json();
         setQuestions(data.results);
+
+        setSelectedCategory("");
+        setSelectedDifficulty("");
       } catch (error) {
         return error;
       }
@@ -74,7 +83,7 @@ const GameScreen = () => {
 
       <div className="questionAndAnswer">
         <div className="questionContainer">
-          <h2>{currentQuestion.question}</h2>
+          <h2>{he.decode(currentQuestion.question)}</h2>
         </div>
 
         <div className="answerContainer">

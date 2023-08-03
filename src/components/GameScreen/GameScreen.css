@@ -40,11 +40,12 @@
 .questionContainer {
   background-color: rgb(66, 179, 177);
   border-radius: 50px;
-  height: 100px;
-  width: 800px;
+  height: 200px;
+  width: 900px;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .questionContainer h2 {
@@ -53,8 +54,8 @@
 }
 
 .answerContainer {
-  height: 150px;
-  width: 750px;
+  height: 200px;
+  width: 900px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
