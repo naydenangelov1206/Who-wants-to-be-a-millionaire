@@ -88,3 +88,17 @@
 .item4 {
   grid-area: 2/2/3/3;
 }
+
+.scoreContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.scoreContainer p {
+  font-size: 30px;
+  color: white;
+}

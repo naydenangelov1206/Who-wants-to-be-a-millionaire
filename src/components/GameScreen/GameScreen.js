@@ -7,6 +7,7 @@ import callAFriend from "./lifelineJokersImages/call-a-friend.png";
 import helpFromTheAudience from "./lifelineJokersImages/help-from-the-audience.png";
 import EndScreen from "../EndScreen/EndScreen";
 import he from "he";
+import Timer from "../Timer/Timer";
 
 const GameScreen = ({
   selectedCategory,
@@ -18,7 +19,17 @@ const GameScreen = ({
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+  const [userAnswer, setUserAnswer] = useState(null);
+
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+
+  const [showNextButton, setShowNextButton] = useState(true);
+
   const [gameOver, setGameOver] = useState(false);
+
+  const [score, setScore] = useState(0);
+
+  const [time, setTime] = useState(60);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -37,7 +48,18 @@ const GameScreen = ({
       }
     }
     fetchQuestions();
-  }, []);
+  }, [selectedCategory, selectedDifficulty]);
+
+  const handleAnswer = answer => {
+    setUserAnswer(answer);
+    setShowCorrectAnswer(true);
+
+    if (answer === questions[currentQuestionIndex].correct_answer) {
+      setScore(prevScore => prevScore + 1);
+    } else {
+      setShowNextButton(true);
+    }
+  };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
@@ -77,8 +99,17 @@ const GameScreen = ({
         />
 
         <div className="nextQuestionButtonContainer">
-          <button onClick={handleNextQuestion}>Next Question</button>
+          {showNextButton && (
+            <button onClick={handleNextQuestion}>Next Question</button>
+          )}
         </div>
+      </div>
+
+      <div className="scoreContainer">
+        <p className="timer">
+          <Timer />
+        </p>
+        <p>Score: {score}</p>
       </div>
 
       <div className="questionAndAnswer">
@@ -88,7 +119,17 @@ const GameScreen = ({
 
         <div className="answerContainer">
           {answers.map((answer, index) => {
-            return <Answer key={index} answer={answer} index={index} />;
+            return (
+              <Answer
+                key={index}
+                answer={answer}
+                index={index}
+                userAnswer={userAnswer}
+                correctAnswer={currentQuestion.correct_answer}
+                showCorrectAnswer={showCorrectAnswer}
+                handleAnswer={handleAnswer}
+              />
+            );
           })}
         </div>
       </div>
