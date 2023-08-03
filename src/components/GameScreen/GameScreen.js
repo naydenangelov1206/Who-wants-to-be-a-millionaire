@@ -29,8 +29,6 @@ const GameScreen = ({
 
   const [score, setScore] = useState(0);
 
-  const [time, setTime] = useState(60);
-
   useEffect(() => {
     async function fetchQuestions() {
       try {
@@ -67,6 +65,10 @@ const GameScreen = ({
     } else {
       setGameOver(true);
     }
+  };
+
+  const handleTimeUp = () => {
+    setGameOver(true);
   };
 
   if (gameOver) {
@@ -107,7 +109,7 @@ const GameScreen = ({
 
       <div className="scoreContainer">
         <p className="timer">
-          <Timer />
+          <Timer onTimeUp={handleTimeUp} />
         </p>
         <p>Score: {score}</p>
       </div>
