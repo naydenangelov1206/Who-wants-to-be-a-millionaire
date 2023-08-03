@@ -44,6 +44,10 @@
   color: yellow;
 }
 
+.questionAndPrizesTable .waypoint {
+  color: white;
+}
+
 .prizeText {
   margin-bottom: 30px;
 }

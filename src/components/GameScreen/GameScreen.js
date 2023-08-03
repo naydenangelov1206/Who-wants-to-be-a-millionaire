@@ -8,6 +8,7 @@ import helpFromTheAudience from "./lifelineJokersImages/help-from-the-audience.p
 import EndScreen from "../EndScreen/EndScreen";
 import he from "he";
 import Timer from "../Timer/Timer";
+import BackgroundMusic from "../BackgroundMusic/BackgroundMusic";
 
 const GameScreen = ({
   selectedCategory,
@@ -89,6 +90,11 @@ const GameScreen = ({
 
   return (
     <div className="gameContainer">
+      <div className="backgroundSoundContainer">
+        <p>Sound:</p>
+        <BackgroundMusic />
+      </div>
+
       <div className="lifelines">
         <img src={fiftyFifty} alt="fifty-lifeline/joker" width={70} />
 
