@@ -1,12 +1,9 @@
-const Answer = () => {
+const Answer = ({ answer, index }) => {
   const answerKeys = ["A", "B", "C", "D"];
 
   return (
     <p>
-      {answerKeys.map(k => {
-        return k;
-      })}
-      : test answer
+      {answerKeys[index]}: {answer}
     </p>
   );
 };

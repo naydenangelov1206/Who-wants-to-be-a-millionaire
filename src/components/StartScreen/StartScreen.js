@@ -1,10 +1,10 @@
 import "./StartScreen.css";
 
-const StartScreen = ({ setStartGame }) => {
+const StartScreen = ({ setSettingsScreen }) => {
   return (
     <div className="startScreenContainer">
       <div className="startButtonContainer">
-        <button onClick={() => setStartGame(true)} className="startButton">
+        <button onClick={() => setSettingsScreen(true)} className="startButton">
           Start Game
         </button>
       </div>

@@ -1,5 +1,4 @@
 const categoryOptions = [
-  "any category",
   "knowledge",
   "books",
   "film",
@@ -21,10 +20,9 @@ const categoryOptions = [
   "animals",
 ];
 
-const difficultyOptions = ["any difficulty", "easy", "medium", "hard"];
+const difficultyOptions = ["easy", "medium", "hard"];
 
 const indexesForCategoryValues = [
-  "0",
   "9",
   "10",
   "11",

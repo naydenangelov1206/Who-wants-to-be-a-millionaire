@@ -2,20 +2,23 @@ import "./App.css";
 import { useState } from "react";
 import StartScreen from "./components/StartScreen/StartScreen";
 import SettingsScreen from "./components/SettingsScreen/SettingsScreen";
-import QuestionScreen from "./components/QuestionScreen/QuestionScreen";
-import EndScreen from "./components/EndScreen/EndScreen";
+import GameScreen from "./components/GameScreen/GameScreen";
 
 function App() {
-  let optionScreen = true;
-  let endGame = true;
+  const [settingsScreen, setSettingsScreen] = useState(false);
+
   const [startGame, setStartGame] = useState(false);
 
   return (
     <div>
-      {!startGame && <StartScreen setStartGame={setStartGame} />}
-      {startGame && <SettingsScreen setStartGame={setStartGame} />}
-      {optionScreen && <QuestionScreen />}
-      {/* {endGame && <EndScreen />} */}
+      {!settingsScreen && <StartScreen setSettingsScreen={setSettingsScreen} />}
+      {settingsScreen && !startGame ? (
+        <SettingsScreen
+          setSettingsScreen={setSettingsScreen}
+          setStartGame={setStartGame}
+        />
+      ) : null}
+      {startGame && <GameScreen />}
     </div>
   );
 }
