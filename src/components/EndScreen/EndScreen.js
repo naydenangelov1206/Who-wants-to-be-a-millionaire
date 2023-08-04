@@ -2,7 +2,24 @@ import "./EndScreen.css";
 import BackgroundMusic from "../BackgroundMusic/BackgroundMusic";
 
 const EndScreen = ({ score, resetGame }) => {
-  const won = true;
+  const winnings = {
+    1: "100",
+    2: "200",
+    3: "300",
+    4: "400",
+    5: "500",
+    6: "1 000",
+    7: "1 500",
+    8: "2 000",
+    9: "3 000",
+    10: "5 000",
+    11: "10 000",
+    12: "20 000",
+    13: "30 000",
+    14: "50 000",
+  };
+
+  const won = score === 15;
 
   return (
     <div className="endScreenContainer">
@@ -14,7 +31,11 @@ const EndScreen = ({ score, resetGame }) => {
       <div className="endScreenMessage">
         <h2>End of the game!</h2>
         <p>Submitted wrong answer or timed out.</p>
-        {won && <p>CONGRATULATIONS YOU WON 100,000lv.</p>}
+        {won ? (
+          <p>CONGRATULATIONS YOU WON 100,000lv.</p>
+        ) : (
+          <p>You won {winnings[score]}lv.</p>
+        )}
         <p>Answered questions: {score}</p>
       </div>
 
