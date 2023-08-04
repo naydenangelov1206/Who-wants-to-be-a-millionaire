@@ -99,6 +99,7 @@ const GameScreen = ({
       setShowIncorrectAnswerMessage(false);
       setShowNextButton(false);
       setTimer(60);
+      answers.sort(() => Math.random() - 0.5);
     } else {
       setGameOver(true);
     }
@@ -228,8 +229,6 @@ const GameScreen = ({
     ...currentQuestion.incorrect_answers,
     currentQuestion.correct_answer,
   ];
-
-  answers.sort(() => Math.random() - 0.5);
 
   return (
     <div className="gameContainer">
